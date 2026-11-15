@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="token" content="%TOKEN%">
+<title>Downloads cleaner</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="labels"></div>
+
+<header id="top">
+  <div class="brand"><span class="logo"></span><div><b>Downloads cleaner</b><small id="path">pick a folder</small></div></div>
+  <div class="chips">
+    <span class="chip ok">● Offline · nothing leaves this computer</span>
+    <span class="chip ok" id="modechip">Copy mode · originals untouched</span>
+  </div>
+</header>
+
+<aside id="settings" class="panel">
+  <h2>Settings</h2>
+  <label class="field"><span>Folder to clean</span><input id="source" spellcheck="false"></label>
+  <div id="quick" class="quick"></div>
+  <div class="seg" id="action"><button data-v="copy" class="on">Copy</button><button data-v="move">Move</button></div>
+  <p class="hint" id="actionhint">Sorted copies go to a new folder. Your files stay exactly where they are.</p>
+  <div id="fields"></div>
+  <details><summary>Kinds and extensions</summary><textarea id="kinds" spellcheck="false" rows="12"></textarea><p class="hint">One kind per line: <code>Name: ext ext ext</code></p></details>
+</aside>
+
+<aside id="stats" class="panel">
+  <div class="cards">
+    <div class="card"><small>Files</small><b id="s-files">0</b></div>
+    <div class="card"><small>Sorted</small><b id="s-sorted">0</b></div>
+    <div class="card red"><small>Duplicates</small><b id="s-dups">0</b></div>
+    <div class="card red"><small>Space wasted</small><b id="s-waste">0 GB</b></div>
+  </div>
+  <div id="kindlist"></div>
+  <details id="dupbox"><summary>Duplicates found</summary><ol id="duplist"></ol></details>
+  <div id="runs"></div>
+</aside>
+
+<footer id="bar">
+  <div id="status"><span id="phase">Ready</span><div class="track"><div id="prog"></div></div></div>
+  <div class="btns">
+    <button id="b-scan" class="primary">Scan</button>
+    <button id="b-apply" disabled>Clean</button>
+    <button id="b-stop" class="hidden">Stop</button>
+    <button id="b-replay" disabled title="Play the last clean again (for screen recording)">Replay</button>
+    <button id="b-open" disabled>Open sorted folder</button>
+  </div>
+</footer>
+
+<div id="toast"></div>
+<div id="finale" class="hidden"><div><b id="f-files"></b><span id="f-dups"></span><em id="f-safe"></em></div></div>
+</body>
+</html>
