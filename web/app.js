@@ -194,6 +194,7 @@ function frame(now) {
   }
   // Finale: a shockwave when the last cube lands.
   if (finaleAt === null && (phase === "applied" || replaying) && launched && queue.length === 0 && moving === 0 && P.some((p) => p.leave !== null)) { finaleAt = clock; showFinale(); }
+  if (finaleAt !== null && clock - finaleAt > 6) $("#finale").classList.add("hidden");
   if (finaleAt !== null) { const u = (clock - finaleAt) / 1.6; wave.material.opacity = Math.max(0, .8 * (1 - u)); wave.scale.setScalar(1 + u * 16); }
   stats();
   composer.render();
@@ -215,7 +216,7 @@ function showFinale() {
   $("#f-files").textContent = `${fmt(sortedCount)} files sorted`;
   $("#f-dups").textContent = `${gb(s.duplicate_bytes)} of duplicates found`;
   $("#f-safe").textContent = action === "move" ? "Moved, not deleted · undo any time · ran offline" : "Nothing moved or deleted · ran offline";
-  $("#finale").classList.remove("hidden"); setTimeout(() => $("#finale").classList.add("hidden"), 6000);
+  $("#finale").classList.remove("hidden");   // hidden again 6 s later on the animation's own clock (see frame())
 }
 
 // ---------- settings panel, built from the server's schema ----------
